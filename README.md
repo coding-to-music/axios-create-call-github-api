@@ -35,6 +35,37 @@ Understanding Axios.create
 
 October 6, 2021 6 min read
 
+```
+> axios-create-call-github-api@1.0.0 start
+> node index.js
+
+┌─────────┬────────────────────┬─────────────────────┬──────────────────┬────────────────┐
+│ (index) │      username      │        name         │ publicReposCount │ followersCount │
+├─────────┼────────────────────┼─────────────────────┼──────────────────┼────────────────┤
+│    0    │     'torvalds'     │  'Linus Torvalds'   │        7         │     167710     │
+│    1    │    'yyx990803'     │     'Evan You'      │       180        │     86639      │
+│    2    │     'gaearon'      │        'dan'        │       262        │     77901      │
+│    3    │      'ruanyf'      │    'Ruan YiFeng'    │        67        │     72885      │
+│    4    │   'JakeWharton'    │   'Jake Wharton'    │       125        │     63849      │
+│    5    │   'peng-zhihui'    │       '稚晖'        │        53        │     61593      │
+│    6    │   'bradtraversy'   │   'Brad Traversy'   │       251        │     58634      │
+│    7    │ 'gustavoguanabara' │ 'Gustavo Guanabara' │        5         │     52918      │
+│    8    │   'sindresorhus'   │   'Sindre Sorhus'   │       1060       │     51834      │
+│    9    │        'tj'        │  'TJ Holowaychuk'   │       296        │     48717      │
+└─────────┴────────────────────┴─────────────────────┴──────────────────┴────────────────┘
+======== Another view ========
+Linus Torvalds with username torvalds has 7 public repos and 167710 followers on GitHub
+Evan You with username yyx990803 has 180 public repos and 86639 followers on GitHub
+dan with username gaearon has 262 public repos and 77901 followers on GitHub
+Ruan YiFeng with username ruanyf has 67 public repos and 72885 followers on GitHub
+Jake Wharton with username JakeWharton has 125 public repos and 63849 followers on GitHub
+稚晖 with username peng-zhihui has 53 public repos and 61593 followers on GitHub
+Brad Traversy with username bradtraversy has 251 public repos and 58634 followers on GitHub
+Gustavo Guanabara with username gustavoguanabara has 5 public repos and 52918 followers on GitHub
+Sindre Sorhus with username sindresorhus has 1060 public repos and 51834 followers on GitHub
+TJ Holowaychuk with username tj has 296 public repos and 48717 followers on GitHub
+```
+
 With more than 19.5 million weekly downloads, Axios is one of the most popular Javascript libraries one can use to make HTTP requests. It can be used in both the browser and with Node.js, which heightens its popularity.
 
 With support for Promises and great features like request-response, transform, and interceptors, Axios is a great choice for making HTTP calls.
@@ -78,9 +109,7 @@ npm init -y
 
 It will add the package.json file and give an output like the below:
 
-## Axios.create new project
-
-![alt text](Isolated.png "Title")
+!["Axios-npm-download.png"](./images/Axios-npm-download.png "Axios-npm-download.png")
 
 Consequently, we will install the Axios npm package with:
 
@@ -90,8 +119,7 @@ npm i --save axios
 
 It will render and output the following:
 
-Successful npm download of Axios.create
-![alt text](Isolated.png "Title")
+!["Successful npm download of Axios.create"](./images/Axios-create-new-project.png "Successful npm download of Axios.create")
 
 Great, now we have Axios installed in our demo Node project!
 
