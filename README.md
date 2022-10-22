@@ -80,6 +80,8 @@ It will add the package.json file and give an output like the below:
 
 ## Axios.create new project
 
+![alt text](Isolated.png "Title")
+
 Consequently, we will install the Axios npm package with:
 
 ```
@@ -89,6 +91,8 @@ npm i --save axios
 It will render and output the following:
 
 Successful npm download of Axios.create
+![alt text](Isolated.png "Title")
+
 Great, now we have Axios installed in our demo Node project!
 
 You can view the changes to this project up to this step in this pull request. Next up we will look at why you should use Axios.create, as well as how to install it in our demo app.
@@ -191,7 +195,7 @@ We can also use the Interceptors feature of Axios for logging all requests and r
 
 When the above code is run with node GitHub.js it will yield an output similar to the following:
 
-## List of most-followed users on GitHub
+!["List of most-followed users on GitHub"](./images/Most-followed-GitHub-users.png "List of most-followed users on GitHub")
 
 From here, we know Linus Travolts is the most-followed user on GitHub with more than 143k followers and has only public repos. Addy Osmani, who works for Google, has almost 38k followers and has 313 public repos.
 
