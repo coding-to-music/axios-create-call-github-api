@@ -44,8 +44,7 @@ async function getSpecificUser() {
 
 async function getCounts(username) {
   const response = await GitHubClient.get(`users/${username}`);
-  console.log(response);
-
+  //   console.log(response);
   return {
     username,
     name: response.data.name,
