@@ -1,12 +1,23 @@
+require("dotenv").config({ path: __dirname + "/.env" });
 const axios = require("axios");
 const GitHubClient = axios.create({
   baseURL: "https://api.GitHub.com/",
   timeout: 1000,
   headers: {
     Accept: "application/vnd.GitHub.v3+json",
+    Authorization: process.env.OCTOKIT_TOKEN,
     //'Authorization': 'token <your-token-here> -- https://docs.GitHub.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token'
   },
 });
+
+// console.log("OCTOKIT_TOKEN %s", process.env.OCTOKIT_TOKEN);
+
+if (!process.env.OCTOKIT_TOKEN) {
+  console.log("OCTOKIT_TOKEN is not defined.");
+  process.exit(1);
+} else {
+  console.log("OCTOKIT_TOKEN is defined.");
+}
 
 async function getMostFollowedUsers() {
   const noOfFollowers = 35000;
@@ -14,6 +25,7 @@ async function getMostFollowedUsers() {
   //ref: https://docs.GitHub.com/en/GitHub/searching-for-information-on-GitHub/searching-on-GitHub/searching-users
   const response = await GitHubClient.get(
     `search/users?q=followers:>${noOfFollowers}&per_page=${perPage}`,
+    // `search/users?q=${process.env.OWNER}&per_page=${perPage}`,
     { timeout: 1500 }
   );
   return response.data.items;
