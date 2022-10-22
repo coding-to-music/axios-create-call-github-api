@@ -1,0 +1,21 @@
+{
+  "name": "axios-create-call-github-api",
+  "version": "1.0.0",
+  "description": "# 🚀 Use Axios.create to call the GitHub API 🚀",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "git add . && git commit -m Build && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coding-to-music/axios-create-call-github-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coding-to-music/axios-create-call-github-api/issues"
+  },
+  "homepage": "https://github.com/coding-to-music/axios-create-call-github-api#readme"
+}
