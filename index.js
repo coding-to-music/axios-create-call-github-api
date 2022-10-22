@@ -31,6 +31,15 @@ async function getMostFollowedUsers() {
   return response.data.items;
 }
 
+async function getSpecificUser() {
+  const perPage = 10;
+  const response = await GitHubClient.get(
+    `search/users?q=${process.env.OWNER}&per_page=${perPage}`,
+    { timeout: 1500 }
+  );
+  return response.data.items;
+}
+
 async function getCounts(username) {
   const response = await GitHubClient.get(`users/${username}`);
   return {
@@ -49,6 +58,15 @@ async function getCounts(username) {
       popularUsernames.map(getCounts)
     );
     console.table(popularUsersWithPublicRepoCount);
+
+    const specificUser = await getSpecificUser();
+    const specificUsernames = mostFollowedUsers.map((user) => user.login);
+    const specificUsersWithPublicRepoCount = await Promise.all(
+      specificUsernames.map(getCounts)
+    );
+    console.table(specificUsersWithPublicRepoCount);
+
+    console.log(`======== Yet Another view ========`);
 
     console.log(`======== Another view ========`);
     popularUsersWithPublicRepoCount.forEach((userWithPublicRepos) => {
