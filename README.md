@@ -109,7 +109,7 @@ npm init -y
 
 It will add the package.json file and give an output like the below:
 
-!["Axios-npm-download.png"](./images/Axios-npm-download.png "Axios-npm-download.png")
+!["Successful npm download of Axios.create"](./images/Axios-create-new-project.png "Successful npm download of Axios.create")
 
 Consequently, we will install the Axios npm package with:
 
@@ -119,7 +119,7 @@ npm i --save axios
 
 It will render and output the following:
 
-!["Successful npm download of Axios.create"](./images/Axios-create-new-project.png "Successful npm download of Axios.create")
+!["Axios-npm-download.png"](./images/Axios-npm-download.png "Axios-npm-download.png")
 
 Great, now we have Axios installed in our demo Node project!
 
