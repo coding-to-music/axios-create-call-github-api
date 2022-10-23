@@ -1,3 +1,4 @@
+const DELAY = 2000;
 require("dotenv").config({ path: __dirname + "/.env" });
 const axios = require("axios");
 const GitHubClient = axios.create({
@@ -10,13 +11,37 @@ const GitHubClient = axios.create({
   },
 });
 
-// console.log("OCTOKIT_TOKEN %s", process.env.OCTOKIT_TOKEN);
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 if (!process.env.OCTOKIT_TOKEN) {
   console.log("OCTOKIT_TOKEN is not defined.");
   process.exit(1);
 } else {
   console.log("OCTOKIT_TOKEN is defined.");
+}
+
+const { Octokit } = require("@octokit/rest");
+// import Octokit from "@octokit/rest";
+
+async function connectGithub() {
+  // console.log("Connecting to GitHub with token " + process.env.OCTOKIT_TOKEN);
+  const octokit = new Octokit({
+    auth: process.env.OCTOKIT_TOKEN,
+    // auth: "token " + process.env.OCTOKIT_TOKEN,
+  });
+  await sleep(DELAY);
+  const { data } = await octokit.rateLimit.get();
+  console.log(
+    `GitHub rate limits: ${data.rate.remaining}/${data.rate.limit}. ` +
+      JSON.stringify(data.rate)
+  );
+
+  if (data.rate.remaining <= 1000) {
+    console.log("WARN: GitHub remaining API calls is less than 1000. Exiting.");
+    process.exit();
+  }
 }
 
 async function getMostFollowedUsers() {
@@ -33,7 +58,7 @@ async function getMostFollowedUsers() {
 }
 
 async function getSpecificUser() {
-  const perPage = 10;
+  const perPage = 1;
   const response = await GitHubClient.get(
     `search/users?q=${process.env.OWNER}&per_page=${perPage}`,
     { timeout: 1500 },
@@ -55,14 +80,15 @@ async function getCounts(username) {
 
 (async () => {
   try {
-    const mostFollowedUsers = await getMostFollowedUsers();
-    const popularUsernames = mostFollowedUsers.map((user) => user.login);
-    const popularUsersWithPublicRepoCount = await Promise.all(
-      popularUsernames.map(getCounts)
-    );
-    console.table(popularUsersWithPublicRepoCount);
+    await connectGithub();
+    // const mostFollowedUsers = await getMostFollowedUsers();
+    // const popularUsernames = mostFollowedUsers.map((user) => user.login);
+    // const popularUsersWithPublicRepoCount = await Promise.all(
+    //   popularUsernames.map(getCounts)
+    // );
+    // console.table(popularUsersWithPublicRepoCount);
 
-    console.log(`======== Yet Another view ========`);
+    // console.log(`======== Another view ========`);
 
     const specificUser = await getSpecificUser();
     // console.log("specificUser= ", specificUser);
@@ -73,12 +99,12 @@ async function getCounts(username) {
     );
     console.table(specificUsersWithPublicRepoCount);
 
-    console.log(`======== Another view ========`);
-    popularUsersWithPublicRepoCount.forEach((userWithPublicRepos) => {
-      console.log(
-        `${userWithPublicRepos.name} with username ${userWithPublicRepos.username} has ${userWithPublicRepos.publicReposCount} public repos and ${userWithPublicRepos.followersCount} followers on GitHub`
-      );
-    });
+    // console.log(`======== Yet Another view ========`);
+    // popularUsersWithPublicRepoCount.forEach((userWithPublicRepos) => {
+    //   console.log(
+    //     `${userWithPublicRepos.name} with username ${userWithPublicRepos.username} has ${userWithPublicRepos.publicReposCount} public repos and ${userWithPublicRepos.followersCount} followers on GitHub`
+    //   );
+    // });
   } catch (error) {
     console.log(`Error calling GitHub API: ${error.message}`, error);
   }
