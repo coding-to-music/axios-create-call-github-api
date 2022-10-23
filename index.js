@@ -44,8 +44,8 @@ async function connectGithub() {
 }
 
 async function getMostFollowedUsers() {
-  const noOfFollowers = 35000;
-  const perPage = 10;
+  const noOfFollowers = 30000;
+  const perPage = 20;
   //ref: https://docs.GitHub.com/en/GitHub/searching-for-information-on-GitHub/searching-on-GitHub/searching-users
   const response = await GitHubClient.get(
     `search/users?q=followers:>${noOfFollowers}&per_page=${perPage}`,
@@ -80,14 +80,14 @@ async function getCounts(username) {
 (async () => {
   try {
     await connectGithub();
-    // const mostFollowedUsers = await getMostFollowedUsers();
-    // const popularUsernames = mostFollowedUsers.map((user) => user.login);
-    // const popularUsersWithPublicRepoCount = await Promise.all(
-    //   popularUsernames.map(getCounts)
-    // );
-    // console.table(popularUsersWithPublicRepoCount);
+    const mostFollowedUsers = await getMostFollowedUsers();
+    const popularUsernames = mostFollowedUsers.map((user) => user.login);
+    const popularUsersWithPublicRepoCount = await Promise.all(
+      popularUsernames.map(getCounts)
+    );
+    console.table(popularUsersWithPublicRepoCount);
 
-    // console.log(`======== Another view ========`);
+    console.log(`======== Another view ========`);
 
     const specificUser = await getSpecificUser();
     // console.log("specificUser= ", specificUser);
