@@ -68,7 +68,7 @@ async function getSpecificUser() {
 
 async function getCounts(username) {
   const response = await GitHubClient.get(`users/${username}`);
-  //   console.log(response);
+  // console.log(response);
   return {
     username,
     name: response.data.name,
@@ -77,15 +77,26 @@ async function getCounts(username) {
   };
 }
 
+async function getRepoCounts(username) {
+  const response = await GitHubClient.get(`repos/${username}`);
+  // console.log(response);
+  return {
+    username,
+    // name: response.data.name,
+    // publicReposCount: response.data.public_repos,
+    // followersCount: response.data.followers,
+  };
+}
+
 (async () => {
   try {
     await connectGithub();
-    const mostFollowedUsers = await getMostFollowedUsers();
-    const popularUsernames = mostFollowedUsers.map((user) => user.login);
-    const popularUsersWithPublicRepoCount = await Promise.all(
-      popularUsernames.map(getCounts)
-    );
-    console.table(popularUsersWithPublicRepoCount);
+    // const mostFollowedUsers = await getMostFollowedUsers();
+    // const popularUsernames = mostFollowedUsers.map((user) => user.login);
+    // const popularUsersWithPublicRepoCount = await Promise.all(
+    //   popularUsernames.map(getCounts)
+    // );
+    // console.table(popularUsersWithPublicRepoCount);
 
     console.log(`======== Another view ========`);
 
@@ -96,6 +107,9 @@ async function getCounts(username) {
     const specificUsersWithPublicRepoCount = await Promise.all(
       specificUsernames.map(getCounts)
     );
+    // const specificUsersWithPublicRepoCountDetails = await Promise.all(
+    //   specificUsernames.map(getRepoCounts)
+    // );
     console.table(specificUsersWithPublicRepoCount);
 
     // console.log(`======== Yet Another view ========`);
