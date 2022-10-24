@@ -104,6 +104,7 @@ async function getCounts(username) {
     //     `${userWithPublicRepos.name} with username ${userWithPublicRepos.username} has ${userWithPublicRepos.publicReposCount} public repos and ${userWithPublicRepos.followersCount} followers on GitHub`
     //   );
     // });
+    await connectGithub();
   } catch (error) {
     console.log(`Error calling GitHub API: ${error.message}`, error);
   }
