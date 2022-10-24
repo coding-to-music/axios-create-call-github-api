@@ -44,7 +44,7 @@ async function connectGithub() {
 }
 
 async function getMostFollowedUsers() {
-  const noOfFollowers = 30000;
+  const noOfFollowers = 20000;
   const perPage = 20;
   //ref: https://docs.GitHub.com/en/GitHub/searching-for-information-on-GitHub/searching-on-GitHub/searching-users
   const response = await GitHubClient.get(
