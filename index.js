@@ -6,7 +6,7 @@ const GitHubClient = axios.create({
   timeout: 1000,
   headers: {
     Accept: "application/vnd.GitHub.v3+json",
-    Authorization: process.env.OCTOKIT_TOKEN,
+    Authorization: `Bearer ` + process.env.OCTOKIT_TOKEN,
   },
 });
 
@@ -51,7 +51,7 @@ async function getMostFollowedUsers() {
     `search/users?q=followers:>${noOfFollowers}&per_page=${perPage}`,
     // `search/users?q=${process.env.OWNER}&per_page=${perPage}`,
     { timeout: 1500 },
-    { Authorization: process.env.OCTOKIT_TOKEN }
+    { Authorization: `Bearer ` + process.env.OCTOKIT_TOKEN }
   );
   return response.data.items;
 }
@@ -61,7 +61,7 @@ async function getSpecificUser() {
   const response = await GitHubClient.get(
     `search/users?q=${process.env.OWNER}&per_page=${perPage}`,
     { timeout: 1500 },
-    { Authorization: process.env.OCTOKIT_TOKEN }
+    { Authorization: `Bearer ` + process.env.OCTOKIT_TOKEN }
   );
   return response.data.items;
 }
